@@ -1,0 +1,18 @@
+# Systemd unit file for default Pulsar Standalone
+    
+[Unit]
+Description=Pulsar Standalone Service
+After=network.target
+    
+[Service]
+SyslogIdentifier=pulsar-standalone
+Environment="PULSAR_STANDALONE_CONF=/etc/pulsar/pulsar-standalone.conf"
+Environment="PULSAR_LOG_DIR=/var/log/pulsar-standalone"
+Environment="PULSAR_LOG_CONF=/opt/apache/apache-pulsar/conf/log4j2.yaml"
+EnvironmentFile=/etc/sysconfig/pulsar-standalone
+ExecStart=/opt/apache/apache-pulsar/bin/pulsar standalone
+User=pulsar-standalone
+Group=pulsar-standalone
+    
+[Install]
+WantedBy=multi-user.target
